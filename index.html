@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Simulador Fuzzy Mamdani - Irrigação</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <h1>Simulador Fuzzy Mamdani: tempo de irrigação</h1>
+    <p><a href="https://github.com/SEU-USUARIO/NOME-DO-REPOSITORIO" target="_blank">Ver código no GitHub</a></p>
+  </header>
+
+  <main>
+
+    <section>
+      <h2>1. Configuração</h2>
+
+      <div class="linha-campos">
+        <div class="campo">
+          <label for="textoUmidade">Umidade do solo (%) — de 0 a 100</label>
+          <input type="text" id="textoUmidade" value="35">
+          <input type="range" id="sliderUmidade" min="0" max="100" step="1" value="35">
+          <p class="erro" id="erroUmidade"></p>
+        </div>
+
+        <div class="campo">
+          <label for="textoTemperatura">Temperatura (°C) — de 10 a 40</label>
+          <input type="text" id="textoTemperatura" value="30">
+          <input type="range" id="sliderTemperatura" min="10" max="40" step="0.5" value="30">
+          <p class="erro" id="erroTemperatura"></p>
+        </div>
+
+        <div class="campo">
+          <label for="selectPasso">Passo de defuzzificação Δz (minutos)</label>
+          <select id="selectPasso">
+            <option value="0.1">0,1</option>
+            <option value="0.05">0,05</option>
+            <option value="0.01">0,01</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="botoes">
+        <button id="botaoCalcular">Calcular</button>
+        <button id="botaoAvancar">Avançar etapa</button>
+        <button id="botaoRestaurar" class="secundario">Restaurar padrão</button>
+      </div>
+
+      <p id="mensagemStatus" class="status"></p>
+
+      <ol id="listaEtapas" class="etapas">
+        <li>Fuzzificação</li>
+        <li>Avaliação das regras</li>
+        <li>Implicação</li>
+        <li>Agregação</li>
+        <li>Defuzzificação</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>Tempo recomendado</h2>
+      <p id="resultadoFinal" class="resultado">—</p>
+    </section>
+
+    <section>
+      <h2>2. Fuzzificação (entradas)</h2>
+      <p class="nota">Os graus de pertinência mostram o quanto o valor combina com cada termo.
+        Eles não são probabilidades e não precisam somar 1.</p>
+
+      <div class="duas-colunas">
+        <div>
+          <canvas id="graficoUmidade" width="600" height="320"></canvas>
+          <table id="tabelaUmidade"></table>
+        </div>
+        <div>
+          <canvas id="graficoTemperatura" width="600" height="320"></canvas>
+          <table id="tabelaTemperatura"></table>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>3. Regras (avaliação com o mínimo)</h2>
+      <p class="nota">Você pode trocar o consequente de cada regra. Linhas verdes são regras ativadas (h &gt; 0).</p>
+
+      <div class="tabela-rolagem">
+        <table id="tabelaRegras">
+          <thead>
+            <tr>
+              <th>Regra</th>
+              <th>Umidade</th>
+              <th>Temperatura</th>
+              <th>ENTÃO tempo é</th>
+              <th>μ umidade</th>
+              <th>μ temperatura</th>
+              <th>h(r) = mínimo</th>
+            </tr>
+          </thead>
+          <tbody id="corpoRegras"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2>4. Implicação (recorte de uma regra)</h2>
+      <label for="selectRegraVisual">Regra para visualizar:</label>
+      <select id="selectRegraVisual"></select>
+      <p id="textoRecorte" class="nota"></p>
+      <canvas id="graficoRecorte" width="600" height="320"></canvas>
+    </section>
+
+    <section>
+      <h2>5. Agregação e defuzzificação (saída)</h2>
+      <p class="nota">A área verde é o MÁXIMO entre os recortes (não é uma soma).</p>
+      <canvas id="graficoSaida" width="900" height="360"></canvas>
+    </section>
+
+    <section>
+      <h2>Passo a passo (log)</h2>
+      <ul id="listaLog"></ul>
+    </section>
+
+  </main>
+
+  <script src="fuzzy.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
