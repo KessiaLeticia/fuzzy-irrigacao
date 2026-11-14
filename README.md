@@ -1,7 +1,13 @@
 # Simulador Fuzzy Mamdani: tempo de irrigação
+Universidade Federal do Piauí (UFPI)  
+Disciplina: Inteligência Artificial  
+Período letivo: 2026.2
 
-**Autores:** Ana Beatriz dos Santos Sousa Costa, Késsia Letícia da Silva Lima e Lara Nubia Martins Ribeiro
-**Disciplina:** Inteligência Artificial
+## 1. Identificação
+Discentes: Ana Beatriz dos Santos Sousa Costa, Késsia Letícia da Silva Lima e Lara Nubia Martins Ribeiro
+
+Link da aplicação no GitHub Pages: <https://kessialeticia.github.io/fuzzy-irrigacao/>  
+Link do repositório no GitHub: <https://github.com/KessiaLeticia/fuzzy-irrigacao.git>
 
 ## O que é o projeto
 
